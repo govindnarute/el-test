@@ -1,0 +1,100 @@
+<div class="container py-4">
+
+  <h2 class="mb-4 text-center">Voter List</h2>
+
+  <!-- Filter Bar -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-md-5">
+          <label for="nameFilter" class="form-label fw-semibold">Filter by Name</label>
+          <input
+            id="nameFilter"
+            type="text"
+            class="form-control"
+            placeholder="Search by name..."
+            [(ngModel)]="nameFilter"
+            (ngModelChange)="applyFilters()"
+          />
+        </div>
+
+        <div class="col-md-5">
+          <label for="epicFilter" class="form-label fw-semibold">Filter by EPIC Number</label>
+          <input
+            id="epicFilter"
+            type="text"
+            class="form-control"
+            placeholder="Search by epic number..."
+            [(ngModel)]="epicFilter"
+            (ngModelChange)="applyFilters()"
+          />
+        </div>
+
+        <div class="col-md-2 d-grid">
+          <button class="btn btn-outline-secondary" (click)="resetFilters()">
+            Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMsg" class="alert alert-danger">{{ errorMsg }}</div>
+
+  <!-- Result count -->
+  <p *ngIf="!loading && !errorMsg" class="text-muted">
+    Showing {{ filteredVoters.length }} of {{ allVoters.length }} voters
+  </p>
+
+  <!-- No results -->
+  <div *ngIf="!loading && filteredVoters.length === 0 && !errorMsg" class="alert alert-warning">
+    No voters match your filter criteria.
+  </div>
+
+  <!-- Cards -->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let voter of filteredVoters">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+          <span class="fw-bold">#{{ voter.wardNo }} - {{ voter.serial_number }}</span>
+          <span
+            class="badge"
+            [ngClass]="(voter.gender === 'female'||voter.gender === 'Female'|| voter.gender ==='महिला') ? 'bg-danger' : 'bg-info text-dark'"
+          >
+            {{ voter.gender | titlecase }}
+          </span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ voter.name }}</h5>
+          <!-- <h5 class="card-subtitle mb-2 text-muted">{{ voter.name_english }}</h5> -->
+          <h6 class="card-subtitle mb-2 text-muted">
+            EPIC: {{ voter.epic_number }}
+          </h6>
+          <ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Relation ({{ voter.relation_type | titlecase }})</span>
+              <span class="fw-semibold">{{ voter.relation_name }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>House Number</span>
+              <span class="fw-semibold">{{ voter.house_number }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Age</span>
+              <span class="fw-semibold">{{ voter.age }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

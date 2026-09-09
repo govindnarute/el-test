@@ -1,0 +1,14 @@
+.login-card {
+  width: 100%;
+  max-width: 430px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.user-icon {
+  width: 64px;
+  height: 64px;
+}
+
+body {
+  background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
+}
