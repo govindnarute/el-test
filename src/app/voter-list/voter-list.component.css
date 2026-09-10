@@ -5,3 +5,243 @@
 .card-header {
   font-size: 0.95rem;
 }
+
+.download-button {
+  width: 2rem;
+  padding-inline: 0;
+}
+
+/* voter-list.component.css */
+.voter-card {
+  --navy: #14315B;
+  --navy-deep: #0C2140;
+  --saffron: #E08A2C;
+  --green: #1E7A52;
+  --ink: #22242A;
+  --muted: #6B7280;
+  --line: #E4E0D4;
+
+  position: relative;
+  background: #FBF8F1;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(20, 20, 20, 0.06), 0 8px 20px rgba(20, 20, 20, 0.10);
+  border: 1px solid rgba(20, 20, 20, 0.06);
+  font-family: 'Inter', system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* faint watermark ring */
+.voter-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -50px;
+  width: 180px;
+  height: 180px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 12px solid rgba(20, 49, 91, 0.035);
+  pointer-events: none;
+}
+
+.vc-header {
+  background: linear-gradient(160deg, var(--navy), var(--navy-deep));
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vc-id-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vc-eyebrow {
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.vc-id {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.vc-gender-pill {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.vc-gender-pill.is-male {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.vc-gender-pill.is-female {
+  background: rgba(224, 138, 44, 0.22);
+  border-color: rgba(224, 138, 44, 0.5);
+}
+
+.vc-tristrip {
+  height: 3px;
+  display: flex;
+}
+
+.vc-tristrip span {
+  flex: 1;
+}
+
+.vc-tristrip span:nth-child(1) {
+  background: var(--saffron);
+}
+
+.vc-tristrip span:nth-child(2) {
+  background: #FBF8F1;
+}
+
+.vc-tristrip span:nth-child(3) {
+  background: var(--green);
+}
+
+.vc-body {
+  position: relative;
+  padding: 18px 16px 6px;
+  flex: 1;
+}
+
+.vc-identity-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.vc-avatar {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #DDE3EC, #C6CFDC);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.vc-avatar svg {
+  width: 24px;
+  height: 24px;
+  opacity: 0.55;
+}
+
+.vc-name {
+  font-family: 'Noto Sans Devanagari', 'Source Serif 4', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 3px;
+  line-height: 1.2;
+}
+
+.vc-epic-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vc-epic-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.vc-epic-value {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.vc-field-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.vc-field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.vc-field-row:last-child {
+  border-bottom: none;
+}
+
+.vc-field-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.vc-field-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: right;
+}
+
+.vc-field-value.is-empty {
+  color: #B7BBC3;
+  font-weight: 500;
+}
+
+.vc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 14px;
+  border-top: 1px dashed var(--line);
+}
+
+.vc-footer-note {
+  font-size: 9.5px;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+}
+
+.vc-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  background: #25D366;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.vc-share-btn:hover {
+  background: #20bd5a;
+}
+
+.vc-share-btn:active {
+  transform: scale(0.94);
+}

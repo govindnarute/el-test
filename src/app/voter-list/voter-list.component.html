@@ -1,6 +1,11 @@
 <div class="container py-4">
 
-  <h2 class="mb-4 text-center">Voter List</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Voter List</h2>
+    <button type="button" class="btn btn-outline-danger" (click)="logout()">
+      Logout
+    </button>
+  </div>
 
   <!-- Filter Bar -->
   <div class="card shadow-sm mb-4">
@@ -61,37 +66,62 @@
 
   <!-- Cards -->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+   
     <div class="col" *ngFor="let voter of filteredVoters">
-      <div class="card h-100 shadow-sm border-0">
-        <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-          <span class="fw-bold">#{{ voter.wardNo }} - {{ voter.serial_number }}</span>
-          <span
-            class="badge"
-            [ngClass]="(voter.gender === 'female'||voter.gender === 'Female'|| voter.gender ==='महिला') ? 'bg-danger' : 'bg-info text-dark'"
-          >
+      <div class="voter-card h-100">
+        <div class="vc-header">
+          <div class="vc-id-block">
+            <span class="vc-eyebrow">Ward &middot; Serial</span>
+            <span class="vc-id">#{{ voter.wardNo }} - {{ voter.serial_number }}</span>
+          </div>
+          <span class="vc-gender-pill"
+            [ngClass]="(voter.gender === 'female' || voter.gender === 'Female' || voter.gender === 'महिला') ? 'is-female' : 'is-male'">
             {{ voter.gender | titlecase }}
           </span>
         </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ voter.name }}</h5>
-          <!-- <h5 class="card-subtitle mb-2 text-muted">{{ voter.name_english }}</h5> -->
-          <h6 class="card-subtitle mb-2 text-muted">
-            EPIC: {{ voter.epic_number }}
-          </h6>
-          <ul class="list-group list-group-flush mt-3">
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Relation ({{ voter.relation_type | titlecase }})</span>
-              <span class="fw-semibold">{{ voter.relation_name }}</span>
+        <div class="vc-tristrip"><span></span><span></span><span></span></div>
+    
+        <div class="vc-body">
+          <div class="vc-identity-row">
+            <div class="vc-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5B6473" stroke-width="1.8">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+            </div>
+            <div>
+              <h5 class="vc-name">{{ voter.name }}</h5>
+              <div class="vc-epic-line">
+                <span class="vc-epic-label">EPIC</span>
+                <span class="vc-epic-value">{{ voter.epic_number }}</span>
+              </div>
+            </div>
+          </div>
+    
+          <ul class="vc-field-list">
+            <li class="vc-field-row">
+              <span class="vc-field-label">Relation ({{ voter.relation_type | titlecase }})</span>
+              <span class="vc-field-value">{{ voter.relation_name }}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>House Number</span>
-              <span class="fw-semibold">{{ voter.house_number }}</span>
+            <li class="vc-field-row">
+              <span class="vc-field-label">House Number</span>
+              <span class="vc-field-value" [class.is-empty]="!voter.house_number">
+                {{ voter.house_number || '—' }}
+              </span>
             </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Age</span>
-              <span class="fw-semibold">{{ voter.age }}</span>
+            <li class="vc-field-row">
+              <span class="vc-field-label">Age</span>
+              <span class="vc-field-value">{{ voter.age }}</span>
             </li>
           </ul>
+        </div>
+    
+        <div class="vc-footer" data-html2canvas-ignore="true">
+          <span class="vc-footer-note">Electoral Photo Identity Card</span>
+          <button type="button" class="vc-share-btn" aria-label="Share voter details on WhatsApp" title="Share on WhatsApp"
+            (click)="shareOnWhatsApp(voter)">
+            <i class="bi bi-whatsapp" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>
